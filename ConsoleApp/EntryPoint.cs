@@ -1,8 +1,10 @@
-﻿
+﻿using OOP;
 class EntryPoint
 {
-    public static void Main()
+    public static void Main1()
     {
+        Inheritance inheritance = new();
+        
         //Creating (Instantiating) objects/instances
         Person p1 = new();
         

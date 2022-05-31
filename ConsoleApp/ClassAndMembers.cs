@@ -6,6 +6,7 @@ using System;
 // Defining class
 // Pascal casing: Class and Methods
 // Camel casing: fields
+namespace OOP;
 
 class Person
 {
