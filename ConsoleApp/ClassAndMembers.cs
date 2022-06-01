@@ -15,7 +15,7 @@ class Person
     public string personName; //Camel casing
     public float heightInFt;
     internal byte age;
-    string gender;
+    //string gender;
 
     public void SpeakLanguage() // Pascal casing
     {

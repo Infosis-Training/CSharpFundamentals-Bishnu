@@ -1,11 +1,8 @@
+using System;
+
 class Basics
 {
-    public static void Main()
-    {
-        LearnLoops();
-    }
-
-    static void LearnConditionals(byte x)
+    void LearnConditionals(byte x)
     {
         if (x < 50) // Comparision operators: <, >, ==, !=, <=, >=
         {
@@ -44,12 +41,18 @@ class Basics
                 break;
         }
     }
-
-    static void LearnLoops()
-    {
+    
+    internal void LearnLoops()
+    {        
         for (byte i = 1; i < 6; i++)
         {
             Console.WriteLine(i + ".NET Training");
+        }
+
+        string[] names = {"Ramesh", "David" , "Anisha"};
+        foreach(string name in names)
+        {
+            Console.WriteLine(name);
         }
 
         byte j = 1;

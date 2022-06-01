@@ -1,4 +1,4 @@
-namespace OOP;
+namespace Object.Oriented;
 class Inheritance
 {
     
