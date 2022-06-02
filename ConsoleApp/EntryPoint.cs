@@ -26,7 +26,17 @@ class EntryPoint
         // Collection coll = new();
         // coll.LearnArrays();
 
-        Basics b = new(); 
-        b.LearnLoops();
+        // Basics b = new(); 
+        // b.LearnLoops();
+
+        Methods m = new();
+        m.Print();
+        m.Print("Bishnu");
+        
+        var d = m.Print("Asmita", 20);
+        Console.WriteLine(d);
+
+        Console.WriteLine(m.Greet("David", "Dr."));
+        Console.WriteLine(m.Greet("David"));
     }
 }
