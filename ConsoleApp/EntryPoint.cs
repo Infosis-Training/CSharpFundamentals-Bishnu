@@ -29,14 +29,18 @@ class EntryPoint
         // Basics b = new(); 
         // b.LearnLoops();
 
-        Methods m = new();
-        m.Print();
-        m.Print("Bishnu");
+        // Methods m = new();
+        // m.Print();
+        // m.Print("Bishnu");
         
-        var d = m.Print("Asmita", 20);
-        Console.WriteLine(d);
+        // var d = m.Print("Asmita", 20);
+        // Console.WriteLine(d);
 
-        Console.WriteLine(m.Greet("David", "Dr."));
-        Console.WriteLine(m.Greet("David"));
+        // Console.WriteLine(m.Greet("David", "Dr."));
+        // Console.WriteLine(m.Greet("David"));
+
+        Exercise2 ex = new();
+        string ini = ex.GetInititals("david", "Fowler");    
+        Console.WriteLine(ini);
     }
 }
