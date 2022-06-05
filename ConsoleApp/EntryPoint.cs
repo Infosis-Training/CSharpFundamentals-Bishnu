@@ -8,10 +8,10 @@ class EntryPoint
     public static void Main()
     {
         // Inheritance inheritance = new();
-        
+
         // //Creating (Instantiating) objects/instances
         // Person p1 = new();
-        
+
         // //Accessing static member
         // Person.scientificName = "Homosapiens";
 
@@ -34,15 +34,27 @@ class EntryPoint
 
         // m.Print();
         // m.Print("Bishnu");
-        
+
         // var d = m.Print("Asmita", 20);
         // Console.WriteLine(d);
 
         // Console.WriteLine(m.Greet("David", "Dr."));
         // Console.WriteLine(m.Greet("David"));
 
-        Exercise2 ex = new();
-        string ini = ex.GetInititals("david", "Fowler");    
-        Console.WriteLine(ini);
+        // Exercise2 ex = new();
+        // string ini = ex.GetInititals("david", "Fowler");    
+        // Console.WriteLine(ini);
+
+        // ExceptionHandling eh = new();
+        // double result = eh.Compute(1, 2, -2);
+        // Console.WriteLine(result);
+
+        Properties prop = new();
+        prop.Name = "EM"; //Set
+        string s = prop.Name; //Get
+        Console.WriteLine(s);
+
+        //prop.Address = "fsdfsfa";
+        string a = prop.Address;
     }
 }
