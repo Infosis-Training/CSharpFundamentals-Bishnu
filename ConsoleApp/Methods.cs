@@ -32,7 +32,7 @@ class Methods
     public bool IsEven(int num) => num % 2 == 0;
 
     // Returning multiple values, using tuple
-    (int, int) FindMinMax(int x, int y, int z)
+    public (int, int) FindMinMax(int x, int y, int z)
     {
         Exercise2 ex = new();
         int max = ex.GetMax(x, y, z);

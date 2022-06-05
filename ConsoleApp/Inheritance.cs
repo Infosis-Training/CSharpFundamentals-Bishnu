@@ -1,5 +1,7 @@
+using OOP;
+
 namespace Object.Oriented;
-class Inheritance
+class African : Person
 {
     
 }

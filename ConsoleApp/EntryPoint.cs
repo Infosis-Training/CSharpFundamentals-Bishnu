@@ -29,7 +29,9 @@ class EntryPoint
         // Basics b = new(); 
         // b.LearnLoops();
 
-        // Methods m = new();
+        Methods m = new();
+        (int Minimum, int Maximum) = m.FindMinMax(34, 56, 12);
+
         // m.Print();
         // m.Print("Bishnu");
         

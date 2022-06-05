@@ -13,7 +13,7 @@ class Person
     // Members: Fields, Methods
     internal static string scientificName;
     public string personName; //Camel casing
-    public float heightInFt;
+    protected float heightInFt;
     internal byte age;
     //string gender;
 
