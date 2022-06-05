@@ -42,4 +42,4 @@
                * Add one static method
           3. Create one interface with
                * Add two methods in it
-               * Derived class on 2 should inplement this interface
+               * Derived class on 2 should implement this interface
