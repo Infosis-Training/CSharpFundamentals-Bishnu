@@ -43,3 +43,9 @@
           3. Create one interface with
                * Add two methods in it
                * Derived class on 2 should implement this interface
+1. **LINQ**
+     * In-memory collection we have:
+     `List<float> bills = new() { 23.5f, 56.2f, 45.1f, 90.34f, 12.23f, 78.65f };`
+          * Queries:
+               * Select all bills higher or equal to 50$
+               * Round all bills to nereast integer
