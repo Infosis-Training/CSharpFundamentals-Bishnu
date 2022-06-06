@@ -49,12 +49,19 @@ class EntryPoint
         // double result = eh.Compute(1, 2, -2);
         // Console.WriteLine(result);
 
-        Properties prop = new();
-        prop.Name = "EM"; //Set
-        string s = prop.Name; //Get
-        Console.WriteLine(s);
+        // Properties prop = new();
+        // prop.Name = "EM"; //Set
+        // string s = prop.Name; //Get
+        // Console.WriteLine(s);
 
-        //prop.Address = "fsdfsfa";
-        string a = prop.Address;
+        // //prop.Address = "fsdfsfa";
+        // string a = prop.Address;
+
+        // Generics g = new();
+        // g.Sum<float>(34, 56);
+        // g.Sum<string>("dsf", "56");
+
+        Collection coll = new();
+        coll.LearnBuiltInCollections();
     }
 }
