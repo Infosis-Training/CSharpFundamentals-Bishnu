@@ -4,7 +4,7 @@ class Linq
 {
     // Language Integrated Query
     int[] numbers = { 2, 3, 4, 5, 6, 1, 7, 8, 9, 10, 11, 12 };
-
+    
     public void LearnLINQ()
     {
         // Get all odd numbers

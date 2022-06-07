@@ -61,7 +61,10 @@ class EntryPoint
         // g.Sum<float>(34, 56);
         // g.Sum<string>("dsf", "56");
 
-        Collection coll = new();
-        coll.LearnBuiltInCollections();
+        // Collection coll = new();
+        // coll.LearnBuiltInCollections();
+
+        Exercise4 ex = new();
+        ex.FetchData();
     }
 }
