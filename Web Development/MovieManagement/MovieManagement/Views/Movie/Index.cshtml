@@ -1,2 +1,36 @@
-﻿
+﻿@model List<Movie>
+
 <h1>This is movie home page</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Movie Name</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Moive Code</th>
+            <th scope="col">Description</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Moive Length</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <th scope="row">@(i++)</th>
+                <td>@movie.Name</td>
+                <td>@movie.Genre</td>
+                <td>@movie.Code</td>
+                <td>@movie.Description</td>
+                <td>@movie.ReleaseDate</td>
+                <td>@movie.LengthInMin</td>                
+            </tr>
+        }
+    </tbody>
+</table>
