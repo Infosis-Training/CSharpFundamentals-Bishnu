@@ -27,10 +27,33 @@ namespace MovieManagement.Controllers
                 LengthInMin = 167,
                 ReleaseDate = DateTime.Parse("2021-04-12")
             };
+            Movie movie3 = new()
+            {
+                Name = "KGF",
+                Code = "D1BC897",
+                Genre = "Action Drama",
+                Description = "Movie based on gold smuggling",
+                LengthInMin = 167,
+                ReleaseDate = DateTime.Parse("2021-04-12")
+            };
+            Movie movie4 = new()
+            {
+                Name = "KGF",
+                Code = "D1BC897",
+                Genre = "Action Drama",
+                Description = "Movie based on gold smuggling",
+                LengthInMin = 167,
+                ReleaseDate = DateTime.Parse("2021-04-12")
+            };
 
-            List<Movie> movies = new() { movie1, movie2 };
+            List<Movie> movies = new() { movie1, movie2, movie3, movie4 };
 
             return View(movies);
+        }
+
+        public IActionResult Add()
+        {
+            return View();
         }
     }
 }

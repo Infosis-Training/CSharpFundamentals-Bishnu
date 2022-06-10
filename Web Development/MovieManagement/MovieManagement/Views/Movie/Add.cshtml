@@ -1,0 +1,38 @@
+﻿@model Movie
+
+@{
+    List<SelectListItem> genres = new();
+    genres.Add(new SelectListItem() { Text = "Comedy", Value = "Comedy" });
+    genres.Add(new SelectListItem() { Text = "Science Fiction", Value = "Science Fiction" });
+    genres.Add(new SelectListItem() { Text = "Horror", Value = "Horror" });
+}
+
+<h3>Add new movie</h3>
+
+<form class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label" asp-for="Code"></label>
+        <input class="form-control" asp-for="Code">
+    </div>
+
+    <div class="col-md-4">
+        <label class="form-label" asp-for="LengthInMin"></label>
+        <input class="form-control" asp-for="LengthInMin">
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" asp-for="Genre"></label>
+        <select class="form-control" asp-for="Genre" asp-items="genres"></select>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label" asp-for="ReleaseDate"></label>
+        <input class="form-control" asp-for="ReleaseDate">
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Save</button>
+    </div>
+</form>
