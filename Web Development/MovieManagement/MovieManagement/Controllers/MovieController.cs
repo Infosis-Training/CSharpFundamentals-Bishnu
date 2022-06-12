@@ -51,9 +51,18 @@ namespace MovieManagement.Controllers
             return View(movies);
         }
 
+        [HttpGet]
         public IActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Movie movie)
+        {
+            //Do something with movie object
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
