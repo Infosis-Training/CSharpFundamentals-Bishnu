@@ -13,3 +13,12 @@
 > dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 1. Install EF Core design package for migrations
 > dotnet add package Microsoft.EntityFrameworkCore.Design
+
+1. Modify Program.cs to register dbcontext class
+```
+builder.Services.AddDbContext<MovieManagementDb>(options =>
+{
+    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MovieDb;Trusted_Connection=True");    
+});
+```
+1. 
