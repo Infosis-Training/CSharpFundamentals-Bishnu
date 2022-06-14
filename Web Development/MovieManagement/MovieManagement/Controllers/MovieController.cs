@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieManagement.Data;
 using MovieManagement.Models;
-using System.Collections.Generic;
 
 namespace MovieManagement.Controllers
 {
@@ -17,10 +16,6 @@ namespace MovieManagement.Controllers
         public IActionResult Index()
         {
             var movies = _db.Movies.ToList();
-
-            ViewBag.Names = new List<string> { "Bishnu", "Ram" };
-            ViewData["Names"] = new List<string> { "Bishnu", "Ram" };
-
             return View(movies);
         }
 

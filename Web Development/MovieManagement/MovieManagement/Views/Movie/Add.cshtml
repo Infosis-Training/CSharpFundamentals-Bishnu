@@ -15,6 +15,7 @@
     <div class="col-md-6">
         <label class="form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name">
+        <span class="text-danger" asp-validation-for="Name"></span>
     </div>
     <div class="col-md-6">
         <label class="form-label" asp-for="Code"></label>
@@ -24,14 +25,17 @@
     <div class="col-md-4">
         <label class="form-label" asp-for="LengthInMin"></label>
         <input class="form-control" asp-for="LengthInMin">
+        <span class="text-danger" asp-validation-for="LengthInMin"></span>
     </div>
     <div class="col-md-4">
         <label class="form-label" asp-for="Genre"></label>
         <select class="form-control" asp-for="Genre" asp-items="genres"></select>
+        <span class="text-danger" asp-validation-for="Genre"></span>
     </div>
     <div class="col-md-4">
         <label class="form-label" asp-for="ReleaseDate"></label>
         <input class="form-control" asp-for="ReleaseDate">
+        <span class="text-danger" asp-validation-for="ReleaseDate"></span>
     </div>
 
     <div class="col-md-12">
