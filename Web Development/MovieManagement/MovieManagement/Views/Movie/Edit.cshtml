@@ -1,7 +1,7 @@
 ﻿@model Movie
 
 @{
-    ViewData["Title"] = "Add New Movie";
+    ViewData["Title"] = "Edit Movie";
 
     List<SelectListItem> genres = new();
     genres.Add(new SelectListItem() { Text = "Comedy", Value = "Comedy" });
@@ -9,16 +9,15 @@
     genres.Add(new SelectListItem() { Text = "Horror", Value = "Horror" });
 }
 
-<h3>Add new movie</h3>
 
-<form class="row g-3" asp-controller="Movie" asp-action="Add" method="post">
+<form class="row g-3" asp-controller="Movie" asp-action="Edit" method="post">
     <div class="col-md-6">
         <label class="form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name">
     </div>
     <div class="col-md-6">
         <label class="form-label" asp-for="Code"></label>
-        <input class="form-control" asp-for="Code">
+        <input class="form-control" asp-for="Code" readonly>
     </div>
 
     <div class="col-md-4">
@@ -40,6 +39,6 @@
     </div>
 
     <div class="col-12">
-        <button type="submit" class="btn btn-success">Save</button>
+        <button type="submit" class="btn btn-success">Update</button>
     </div>
 </form>
