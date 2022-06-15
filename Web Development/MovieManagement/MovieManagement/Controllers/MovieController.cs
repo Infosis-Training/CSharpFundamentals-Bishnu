@@ -51,5 +51,21 @@ namespace MovieManagement.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var movieToDelete = _db.Movies.Find(id);
+            return View(movieToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movie movie)
+        {
+            _db.Movies.Remove(movie);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

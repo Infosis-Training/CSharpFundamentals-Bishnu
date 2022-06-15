@@ -1,0 +1,21 @@
+﻿@model Movie
+
+@{
+    ViewData["Title"] = "Delete Movie";
+}
+
+<h3 class="text-danger">Are you sure to delete following movie data?</h3>
+
+<form class="row g-3" asp-controller="Movie" asp-action="Delete" method="post">
+    <h4>Name:@Model.Name</h4>
+    <h4>Code:@Model.Code</h4>
+    <h4>LengthInMin:@Model.LengthInMin</h4>
+    <h4>Genre:@Model.Genre</h4>
+    <h4>Release Date:@Model.ReleaseDate</h4>
+    <h4>Description:@Model.Description</h4>
+    
+    <div class="col-12">
+        <a class="btn btn-success" href="/movie/index">Cancel</a>
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>
