@@ -1,0 +1,15 @@
+﻿@page "/images"
+
+@model ImageProcessing.Pages.ImageUploadModel
+
+@Model.CurrentTime
+
+<form enctype="multipart/form-data" method="post">
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Select Images</label>
+        <input class="form-control" asp-for="File">
+    </div>
+    <button type="submit" class="btn btn-success">Upload Images </button>
+</form>
+
+<img src="/images/catrotated.jpg" />
