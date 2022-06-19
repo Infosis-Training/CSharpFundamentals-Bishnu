@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MovieManagement.Data;
 using MovieManagement.Models;
 
@@ -20,13 +22,18 @@ namespace MovieManagement.Controllers
         }
 
         [HttpGet]
-        public IActionResult Add()
-        {
+        public async Task<IActionResult> Add()
+        {   
+            var genres = await _db.Genre.ToListAsync();
+            var genreList = genres.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
+            genreList.Add(new SelectListItem { Text = "Choose gender...", Value = "", Selected = true});
+            ViewData["genreList"] = genreList;
+
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(Movie movie)
+        public IActionResult Add(MovieViewModel movie)
         {
             movie.Code = Guid.NewGuid().ToString();
 

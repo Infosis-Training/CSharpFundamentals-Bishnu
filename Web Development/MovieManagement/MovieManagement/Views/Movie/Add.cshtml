@@ -2,11 +2,7 @@
 
 @{
     ViewData["Title"] = "Add New Movie";
-
-    List<SelectListItem> genres = new();
-    genres.Add(new SelectListItem() { Text = "Comedy", Value = "Comedy" });
-    genres.Add(new SelectListItem() { Text = "Science Fiction", Value = "Science Fiction" });
-    genres.Add(new SelectListItem() { Text = "Horror", Value = "Horror" });
+    var genres = ViewData["genreList"] as IEnumerable<SelectListItem>;
 }
 
 <h3>Add new movie</h3>
@@ -29,7 +25,7 @@
     </div>
     <div class="col-md-4">
         <label class="form-label" asp-for="Genre"></label>
-        <select class="form-control" asp-for="Genre" asp-items="genres"></select>
+        <select class="form-control" asp-for="Genre" asp-items="genres" multiple></select>
         <span class="text-danger" asp-validation-for="Genre"></span>
     </div>
     <div class="col-md-4">

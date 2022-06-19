@@ -7,7 +7,7 @@ namespace MovieManagement.Models
         public int Id { get; set; }
         
         [Required]
-        [MinLength(2, ErrorMessage = "Name must be of at least 3 chars")]
+        [MinLength(2, ErrorMessage = "Name must be of at least 2 chars")]
         public string Name { get; set; } = string.Empty;
         
         public string Description { get; set; } = string.Empty;
