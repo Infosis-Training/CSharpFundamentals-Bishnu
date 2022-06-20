@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.Data;
 using MovieManagement.Models;
+using MovieManagement.ViewModels;
 
 namespace MovieManagement.Controllers
 {
@@ -18,24 +19,46 @@ namespace MovieManagement.Controllers
         public IActionResult Index()
         {
             var movies = _db.Movies.ToList();
+
             return View(movies);
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
-        {   
+        {               
             var genres = await _db.Genre.ToListAsync();
-            var genreList = genres.Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }).ToList();
-            genreList.Add(new SelectListItem { Text = "Choose gender...", Value = "", Selected = true});
-            ViewData["genreList"] = genreList;
+            var genresItems = genres.Select(x => 
+                new SelectListItem 
+                { 
+                    Text = x.Name, 
+                    Value = x.Id.ToString() 
+                }).ToList();
 
-            return View();
+            genresItems.Add(new SelectListItem { Text = "Choose gender...", Value = "", Selected = true});
+
+            MovieViewModel movieViewModel = new();
+            movieViewModel.Genres = genresItems;
+
+            return View(movieViewModel);
         }
 
         [HttpPost]
-        public IActionResult Add(MovieViewModel movie)
-        {
+        public IActionResult Add(MovieViewModel movieViewModel)
+        {   
+            Movie movie = new()
+            {
+                Name = movieViewModel.Name,
+                Description = movieViewModel.Description,
+                Genre = movieViewModel.Genre,
+                LengthInMin = movieViewModel.LengthInMin,
+                ReleaseDate = movieViewModel.ReleaseDate,
+            };
+
             movie.Code = Guid.NewGuid().ToString();
+
+            var stream = new MemoryStream();
+            movieViewModel.Banner?.CopyTo(stream);
+            movie.Banner = stream.ToArray();
 
             _db.Movies.Add(movie);
             _db.SaveChanges();
