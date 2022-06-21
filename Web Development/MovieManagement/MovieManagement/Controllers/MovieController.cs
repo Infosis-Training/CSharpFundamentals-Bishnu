@@ -18,13 +18,13 @@ namespace MovieManagement.Controllers
 
         public IActionResult Index()
         {   
-            var movies = _db.Movies.ToList();
+            var movies = _db.Movies.Include(x => x.Genre).ToList();
 
             var movieViewModels = movies.Select(x => new MovieViewModel()
             {
                 Name = x.Name,
                 Description = x.Description,
-                Genre = x.Genre,
+                Genre = x.Genre?.Name ?? "N/A",
                 LengthInMin = x.LengthInMin,
                 ReleaseDate = x.ReleaseDate,
                 BannerDataUrl = $"data:image/png;base64,{Convert.ToBase64String(x.Banner)}",
@@ -61,7 +61,7 @@ namespace MovieManagement.Controllers
             {
                 Name = movieViewModel.Name,
                 Description = movieViewModel.Description,
-                Genre = movieViewModel.Genre,
+                GenreId = int.Parse(movieViewModel.Genre),
                 LengthInMin = movieViewModel.LengthInMin,
                 ReleaseDate = movieViewModel.ReleaseDate,
             };

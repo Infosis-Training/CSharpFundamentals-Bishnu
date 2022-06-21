@@ -15,7 +15,7 @@ namespace MovieManagement.ViewModels
         public string Code { get; set; } = string.Empty;
                 
         [Required]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; } = DateTime.Now;
 
         [Required]
         public float LengthInMin { get; set; }
