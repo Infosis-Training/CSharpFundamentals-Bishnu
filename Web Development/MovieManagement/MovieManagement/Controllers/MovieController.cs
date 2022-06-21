@@ -17,10 +17,22 @@ namespace MovieManagement.Controllers
         }
 
         public IActionResult Index()
-        {
+        {   
             var movies = _db.Movies.ToList();
 
-            return View(movies);
+            var movieViewModels = movies.Select(x => new MovieViewModel()
+            {
+                Name = x.Name,
+                Description = x.Description,
+                Genre = x.Genre,
+                LengthInMin = x.LengthInMin,
+                ReleaseDate = x.ReleaseDate,
+                BannerDataUrl = $"data:image/png;base64,{Convert.ToBase64String(x.Banner)}",
+                Code = x.Code,
+                Id = x.Id
+            }).ToList();
+
+            return View(movieViewModels);
         }
 
         [HttpGet]

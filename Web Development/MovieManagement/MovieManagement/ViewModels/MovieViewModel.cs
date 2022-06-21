@@ -21,6 +21,7 @@ namespace MovieManagement.ViewModels
         public float LengthInMin { get; set; }
 
         public IFormFile Banner { get; set; }
+        public string BannerDataUrl { get; set; }
 
         [Required]
         public string Genre { get; set; } = string.Empty;
