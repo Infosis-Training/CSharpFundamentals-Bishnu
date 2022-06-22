@@ -49,3 +49,5 @@
           * Queries:
                * Select all bills higher or equal to 50$
                * Round all bills to nereast integer
+ 1. **Movie Management**
+     * Add bootstrap cards on movies index table
