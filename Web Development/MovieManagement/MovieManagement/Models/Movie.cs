@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MovieManagement.Models
+﻿namespace MovieManagement.Models
 {
     public class Movie
     {

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.Data;
+using MovieManagement.Mapper;
 using MovieManagement.Models;
 using MovieManagement.ViewModels;
 
@@ -19,58 +20,27 @@ namespace MovieManagement.Controllers
         public IActionResult Index()
         {   
             var movies = _db.Movies.Include(x => x.Genre).ToList();
-
-            var movieViewModels = movies.Select(x => new MovieViewModel()
-            {
-                Name = x.Name,
-                Description = x.Description,
-                Genre = x.Genre?.Name ?? "N/A",
-                LengthInMin = x.LengthInMin,
-                ReleaseDate = x.ReleaseDate,
-                BannerDataUrl = $"data:image/png;base64,{Convert.ToBase64String(x.Banner)}",
-                Code = x.Code,
-                Id = x.Id
-            }).ToList();
+            var movieViewModels = movies.Select(x => x.ToViewModel()).ToList();
 
             return View(movieViewModels);
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
-        {               
-            var genres = await _db.Genre.ToListAsync();
-            var genresItems = genres.Select(x => 
-                new SelectListItem 
-                { 
-                    Text = x.Name, 
-                    Value = x.Id.ToString() 
-                }).ToList();
+        {
 
-            genresItems.Add(new SelectListItem { Text = "Choose gender...", Value = "", Selected = true});
-
-            MovieViewModel movieViewModel = new();
-            movieViewModel.Genres = genresItems;
+            MovieViewModel movieViewModel = new()
+            {
+                Genres = GetGenreSelectListItems()
+            };
 
             return View(movieViewModel);
         }
 
         [HttpPost]
         public IActionResult Add(MovieViewModel movieViewModel)
-        {   
-            Movie movie = new()
-            {
-                Name = movieViewModel.Name,
-                Description = movieViewModel.Description,
-                GenreId = int.Parse(movieViewModel.Genre),
-                LengthInMin = movieViewModel.LengthInMin,
-                ReleaseDate = movieViewModel.ReleaseDate,
-            };
-
-            movie.Code = Guid.NewGuid().ToString();
-
-            var stream = new MemoryStream();
-            movieViewModel.Banner?.CopyTo(stream);
-            movie.Banner = stream.ToArray();
+        {
+            var movie = movieViewModel.ToModel();
 
             _db.Movies.Add(movie);
             _db.SaveChanges();
@@ -82,12 +52,16 @@ namespace MovieManagement.Controllers
         public IActionResult Edit(int id)
         {
             var movieToEdit = _db.Movies.Find(id);
-            return View(movieToEdit);
+            var movieViewModel = movieToEdit.ToViewModel();
+            movieViewModel.Genres = GetGenreSelectListItems();
+
+            return View();
         }
 
         [HttpPost]
         public IActionResult Edit(Movie movie)
         {   
+
             _db.Movies.Update(movie);
             _db.SaveChanges();
 
@@ -108,6 +82,22 @@ namespace MovieManagement.Controllers
             _db.SaveChanges();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        private List<SelectListItem> GetGenreSelectListItems()
+        {
+            var genres = _db.Genre.ToList();
+
+            var genresItems = genres.Select(x =>
+                            new SelectListItem
+                            {
+                                Text = x.Name,
+                                Value = x.Id.ToString()
+                            }).ToList();
+
+            genresItems.Add(new SelectListItem { Text = "Choose gender...", Value = "", Selected = true });
+
+            return genresItems;
         }
     }
 }
