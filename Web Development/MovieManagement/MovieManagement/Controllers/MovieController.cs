@@ -17,18 +17,22 @@ namespace MovieManagement.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
-        {   
+        public IActionResult Index(string sortOrder)
+        {
             var movies = _db.Movies.Include(x => x.Genre).ToList();
-            var movieViewModels = movies.Select(x => x.ToViewModel()).ToList();
+            var movieViewModels = new List<MovieViewModel>();
 
+            if (movies.Any())
+            {
+                movieViewModels = movies.Select(x => x.ToViewModel()).ToList();
+
+            }
             return View(movieViewModels);
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-
             MovieViewModel movieViewModel = new()
             {
                 Genres = GetGenreSelectListItems()
@@ -38,14 +42,19 @@ namespace MovieManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(MovieViewModel movieViewModel)
+        public IActionResult Add([FromForm] MovieViewModel movieViewModel)
         {
-            var movie = movieViewModel.ToModel();
+            if (ModelState.IsValid)
+            {
+                var movie = movieViewModel.ToModel();
 
-            _db.Movies.Add(movie);
-            _db.SaveChanges();
+                _db.Movies.Add(movie);
+                _db.SaveChanges();
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(movieViewModel);
         }
 
         [HttpGet]
@@ -55,15 +64,19 @@ namespace MovieManagement.Controllers
             var movieViewModel = movieToEdit.ToViewModel();
             movieViewModel.Genres = GetGenreSelectListItems();
 
-            return View();
+            return View(movieViewModel);
         }
 
         [HttpPost]
-        public IActionResult Edit(Movie movie)
-        {   
+        public IActionResult Edit(MovieViewModel movieViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var movie = movieViewModel.ToModel();
 
-            _db.Movies.Update(movie);
-            _db.SaveChanges();
+                _db.Movies.Update(movie);
+                _db.SaveChanges();
+            }
 
             return RedirectToAction(nameof(Index));
         }

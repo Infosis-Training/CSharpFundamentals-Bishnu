@@ -6,7 +6,7 @@
 }
 
 
-<form class="row g-3" asp-controller="Movie" asp-action="Edit" method="post">
+<form class="row g-3" asp-controller="Movie" asp-action="Edit" method="post" enctype="multipart/form-data">
     <div class="col-md-6">
         <label class="form-label" asp-for="Name"></label>
         <input class="form-control" asp-for="Name">
@@ -27,6 +27,12 @@
     <div class="col-md-4">
         <label class="form-label" asp-for="ReleaseDate"></label>
         <input class="form-control" asp-for="ReleaseDate">
+    </div>
+
+    <div class="col-md-12">
+        <label asp-for="Banner" class="form-label">Select Banner</label>
+        <input class="form-control" asp-for="Banner">
+        <img class="img-thumbnail img-fluid" src="@Model.BannerDataUrl" />
     </div>
 
     <div class="col-md-12">
