@@ -51,3 +51,8 @@
                * Round all bills to nereast integer
  1. **Movie Management**
      * Add bootstrap cards on movies index table
+     * On movies list (index page)
+         * Apply sorting on columns "Movie Name", "Release Date" and "LengthinMin", clicking on a column header should toggle sorting order of data respectively.
+         * Apply filtering (searching) on movie list table with search box on top of table, searching should be on movie name and description.
+         
+       
