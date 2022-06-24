@@ -51,3 +51,9 @@
                * Round all bills to nereast integer
  1. **Movie Management**
      * Add bootstrap cards on movies index table
+     * On movies list (index page) 
+         * Apply sorting on columns "Movie Name", "Release Date" and "LengthinMin", clicking on a column header should toggle sorting order of data respectively.
+         * Apply filtering (searching) on movie list table with search box on top of table, searching should be on movie name and description.
+         * Note: Follow this tutorial to complete above - https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
+         
+       
