@@ -19,15 +19,36 @@
                 Sort By
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["MovieNameSortParam"]">Movie Name</a></li>
-                <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["ReleaseDateSortParam"]">Release Date</a></li>
+                <li>
+                    <a class="dropdown-item" asp-action="Index"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["MovieNameSortParam"]">
+                        Movie Name
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item"
+                       asp-action="Index"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["ReleaseDateSortParam"]">
+                        Movie Release Date
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item"
+                       asp-action="Index"
+                       asp-route-searchString="@ViewData["CurrentFilter"]"
+                       asp-route-sortOrder="@ViewData["GenreSortParam"]">
+                        Movie Genre (Type)
+                    </a>
+                </li>
                 <li><a class="dropdown-item" asp-action="Index">Clear all filter</a></li>
             </ul>
         </div>
     </div>
 
     <div class="col-md-3">
-        <a class="btn btn-success form-control" href="/movie/add">Add Movie</a>
+        <a class="btn btn-success form-control" href="/movie/add"><i class="bi bi-plus-lg"></i> Add Movie</a>
     </div>
 </form>
 
@@ -36,14 +57,20 @@
     {
         <div class="col">
             <div class="card h-100">
-                <img src="@movieViewModel.BannerDataUrl" class="card-img-top" alt="movie-banner">
+                <img src="@movieViewModel.BannerDataUrl" class="card-img-top h-50" alt="movie-banner">
                 <div class="card-body">
-                    <h5 class="card-title">@movieViewModel.Name</h5>
+                    <h5 class="card-title">
+                        @movieViewModel.Name
+                        <span class="float-end">
+                            <a asp-action="Edit" asp-route-id="@movieViewModel.Id"><i class="bi bi-pencil-fill text-warning"></i></a>
+                            <a asp-action="Delete" asp-route-id="@movieViewModel.Id"><i class="bi bi-trash-fill text-danger"></i></a>
+                        </span>
+                    </h5>
                     <h6 class="card-subtitle mb-2 text-muted">@movieViewModel.GenreName (Length: @movieViewModel.LengthInMin mins)</h6>
                     <p class="card-text">@movieViewModel.Description</p>
                 </div>
                 <div class="card-footer">
-                    <small class="text-muted">Released on @movieViewModel.ReleaseDate</small>
+                    <h6 class="text-muted">Released on @movieViewModel.ReleaseDate</h6>
                 </div>
             </div>
         </div>

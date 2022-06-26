@@ -21,6 +21,7 @@ namespace MovieManagement.Controllers
         {
             ViewData["MovieNameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["ReleaseDateSortParam"] = sortOrder == "release_date_desc" ? "release_date_asc" : "release_date_desc";
+            ViewData["GenreSortParam"] = sortOrder == "genre_desc" ? "genre_asc" : "genre_desc";
             ViewData["CurrentFilter"] = searchString;
 
             var movies = _db.Movies.Include(x => x.Genre).AsQueryable();
@@ -37,6 +38,8 @@ namespace MovieManagement.Controllers
                 "name_desc" => movies.OrderByDescending(x => x.Name),
                 "release_date_desc" => movies.OrderByDescending(x => x.ReleaseDate),
                 "release_date_asc" => movies.OrderBy(x => x.ReleaseDate),
+                "genre_desc" => movies.OrderByDescending(x => x.Genre.Name),
+                "genre_asc" => movies.OrderBy(x => x.Genre.Name),
                 _ => movies.OrderBy(x => x.Name)
             };
 
