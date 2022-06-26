@@ -17,14 +17,34 @@ namespace MovieManagement.Controllers
             _db = db;
         }
 
-        public IActionResult Index(string sortOrder)
+        public IActionResult Index(string searchString, string sortOrder)
         {
-            var movies = _db.Movies.Include(x => x.Genre).ToList();
+            ViewData["MovieNameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["ReleaseDateSortParam"] = sortOrder == "release_date_desc" ? "release_date_asc" : "release_date_desc";
+            ViewData["CurrentFilter"] = searchString;
+
+            var movies = _db.Movies.Include(x => x.Genre).AsQueryable();
             var movieViewModels = new List<MovieViewModel>();
 
-            if (movies.Any())
+            if (!string.IsNullOrEmpty(searchString))
             {
-                movieViewModels = movies.Select(x => x.ToViewModel()).ToList();
+                movies = movies.Where(m => m.Name.Contains(searchString)
+                                       || m.Description.Contains(searchString));
+            }
+
+            movies = sortOrder switch
+            {
+                "name_desc" => movies.OrderByDescending(x => x.Name),
+                "release_date_desc" => movies.OrderByDescending(x => x.ReleaseDate),
+                "release_date_asc" => movies.OrderBy(x => x.ReleaseDate),
+                _ => movies.OrderBy(x => x.Name)
+            };
+
+            var moviesFetched = movies.ToList();
+
+            if (moviesFetched.Any())
+            {
+                movieViewModels = moviesFetched.Select(x => x.ToViewModel()).ToList();
 
             }
             return View(movieViewModels);
