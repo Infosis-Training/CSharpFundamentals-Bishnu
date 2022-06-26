@@ -80,9 +80,12 @@ namespace MovieManagement.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var movieToEdit = _db.Movies.Find(id);
-            var movieViewModel = movieToEdit.ToViewModel();
-            movieViewModel.Genres = GetGenreSelectListItems();
+            var movieToEdit = _db.Movies.Include(x => x.Genre)
+                                        .FirstOrDefault(x => x.Id == id);
+            var movieViewModel = movieToEdit?.ToViewModel();
+            
+            if (movieViewModel != null)
+                movieViewModel.Genres = GetGenreSelectListItems();
 
             return View(movieViewModel);
         }
@@ -90,7 +93,7 @@ namespace MovieManagement.Controllers
         [HttpPost]
         public IActionResult Edit(MovieViewModel movieViewModel)
         {
-            if (ModelState.IsValid)
+            if (movieViewModel != null && ModelState.IsValid)
             {
                 var movie = movieViewModel.ToModel();
 

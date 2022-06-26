@@ -6,20 +6,23 @@
 }
 
 <form asp-action="Index" method="get" class="row">
-    <div class="col-md-7">
+    <div class="col-md-5">
         <input class="form-control" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Type movie keywords: name, description etc." />
     </div>
     <div class="col-md-2">
-        <div class="btn-group w-100">
-            <input class="form-control btn btn-primary" type="submit" value="Search" />
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="visually-hidden">Toggle Dropdown</span>
+        <input class="form-control btn btn-primary" type="submit" value="Search" />
+    </div>
+
+    <div class="col-md-2">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Sort By
             </button>
-            <ul class="dropdown-menu">
-                <li>
-                    <a class="dropdown-item" asp-action="Index">Clear all filter</a>
-                </li>
-             </ul>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["MovieNameSortParam"]">Movie Name</a></li>
+                <li><a class="dropdown-item" asp-action="Index" asp-route-sortOrder="@ViewData["ReleaseDateSortParam"]">Release Date</a></li>
+                <li><a class="dropdown-item" asp-action="Index">Clear all filter</a></li>
+            </ul>
         </div>
     </div>
 
@@ -27,47 +30,22 @@
         <a class="btn btn-success form-control" href="/movie/add">Add Movie</a>
     </div>
 </form>
-<hr />
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col" style="width:150px">Banner</th>
 
-            <th scope="col">
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["MovieNameSortParam"]">Name</a>
-            </th>
-            <th scope="col">Genre</th>
-            <th scope="col">Moive Code</th>
-            <th scope="col">Description</th>
-            <th scope="col">
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["ReleaseDateSortParam"]">Release Date</a>
-            </th>
-            <th scope="col">Moive Length</th>
-            <th scope="col">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            int i = 1;
-        }
-
-        @foreach (var movieViewModel in Model)
-        {
-            <tr>
-                <th scope="row">@(i++)</th>
-                <td><img class="img-thumbnail img-fluid" src="@movieViewModel.BannerDataUrl"></td>
-                <td>@movieViewModel.Name</td>
-                <td>@movieViewModel.Genre</td>
-                <td>@movieViewModel.Code</td>
-                <td>@movieViewModel.Description</td>
-                <td>@movieViewModel.ReleaseDate</td>
-                <td>@movieViewModel.LengthInMin</td>
-                <td>
-                    <a class="btn btn-outline-warning btn-sm" href="/movie/edit/@movieViewModel.Id">Edit</a>
-                    <a class="btn btn-outline-danger btn-sm" href="/movie/delete/@movieViewModel.Id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-4 g-4 mt-3">
+    @foreach (var movieViewModel in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <img src="@movieViewModel.BannerDataUrl" class="card-img-top" alt="movie-banner">
+                <div class="card-body">
+                    <h5 class="card-title">@movieViewModel.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@movieViewModel.GenreName (Length: @movieViewModel.LengthInMin mins)</h6>
+                    <p class="card-text">@movieViewModel.Description</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Released on @movieViewModel.ReleaseDate</small>
+                </div>
+            </div>
+        </div>
+    }
+</div>

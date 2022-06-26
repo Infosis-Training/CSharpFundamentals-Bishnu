@@ -21,19 +21,22 @@
         <input class="form-control" asp-for="LengthInMin">
     </div>
     <div class="col-md-4">
-        <label class="form-label" asp-for="Genre"></label>
-        <select class="form-control" asp-for="Genre" asp-items="Model.Genres"></select>
+        <label class="form-label" asp-for="GenreId"></label>
+        <select class="form-control" asp-for="GenreId" asp-items="Model.Genres"></select>
     </div>
     <div class="col-md-4">
         <label class="form-label" asp-for="ReleaseDate"></label>
         <input class="form-control" asp-for="ReleaseDate">
     </div>
 
-    <div class="col-md-12">
+    <div class="col-md-8">
         <label asp-for="Banner" class="form-label">Select Banner</label>
         <input class="form-control" asp-for="Banner">
-        <img class="img-thumbnail img-fluid" src="@Model.BannerDataUrl" />
     </div>
+    <div class="col-4">
+        <img class="img-thumbnail img-fluid" src="@Model.BannerDataUrl"/>
+    </div>
+
 
     <div class="col-md-12">
         <label class="form-label" asp-for="Description"></label>

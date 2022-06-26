@@ -11,7 +11,8 @@ namespace MovieManagement.Mapper
             {
                 Name = movie.Name,
                 Description = movie.Description,
-                Genre = movie.Genre?.Name ?? "N/A",
+                GenreId = movie.Genre?.Id,
+                GenreName = movie.Genre?.Name ?? "N/A",
                 LengthInMin = movie.LengthInMin,
                 ReleaseDate = movie.ReleaseDate,
                 BannerDataUrl = $"data:image/png;base64,{Convert.ToBase64String(movie.Banner)}",
@@ -24,15 +25,14 @@ namespace MovieManagement.Mapper
         {
             var movie = new Movie
             {
+                Id = movieViewModel.Id,
                 Name = movieViewModel.Name,
-                Description = movieViewModel.Description ?? "N/A",                
+                GenreId = movieViewModel.GenreId,
+                Description = movieViewModel.Description ?? "N/A",
                 LengthInMin = movieViewModel.LengthInMin,
                 ReleaseDate = movieViewModel.ReleaseDate,
                 Code = Guid.NewGuid().ToString()
             };
-
-            int.TryParse(movieViewModel.Genre, out int genreId);
-            movie.GenreId = genreId == default ? null : genreId;
 
             var stream = new MemoryStream();
             movieViewModel.Banner?.CopyTo(stream);

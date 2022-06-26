@@ -20,11 +20,12 @@ namespace MovieManagement.ViewModels
         [Required]
         public float LengthInMin { get; set; }
 
-        public IFormFile Banner { get; set; }
-        public string BannerDataUrl { get; set; }
+        public IFormFile? Banner { get; set; }
+        public string? BannerDataUrl { get; set; } = string.Empty;
 
-        [Required]
-        public string Genre { get; set; } = string.Empty;
-        public List<SelectListItem> Genres { get; set; }
+        public int? GenreId { get; set; }
+        public string? GenreName { get; set; }
+
+        public List<SelectListItem>? Genres { get; set; } = default!;
     }
 }
