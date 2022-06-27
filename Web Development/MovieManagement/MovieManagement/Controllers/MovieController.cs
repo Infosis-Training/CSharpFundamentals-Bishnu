@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.Data;
+using MovieManagement.Helpers;
 using MovieManagement.Mapper;
 using MovieManagement.Models;
 using MovieManagement.ViewModels;
@@ -17,15 +18,20 @@ namespace MovieManagement.Controllers
             _db = db;
         }
 
-        public IActionResult Index(string searchString, string sortOrder)
+        public IActionResult Index(string searchString, 
+            string sortOrder, 
+            int pageNumber = 1, 
+            int pageSize = 4)
         {
+            ViewData["CurrentSort"] = sortOrder;
+            ViewData["PageNumber"] = pageNumber;
+
             ViewData["MovieNameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["ReleaseDateSortParam"] = sortOrder == "release_date_desc" ? "release_date_asc" : "release_date_desc";
             ViewData["GenreSortParam"] = sortOrder == "genre_desc" ? "genre_asc" : "genre_desc";
             ViewData["CurrentFilter"] = searchString;
 
             var movies = _db.Movies.Include(x => x.Genre).AsQueryable();
-            var movieViewModels = new List<MovieViewModel>();
 
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -43,18 +49,15 @@ namespace MovieManagement.Controllers
                 _ => movies.OrderBy(x => x.Name)
             };
 
-            var moviesFetched = movies.ToList();
+            var moviesFetched = new PaginationList<Movie>(movies, pageNumber, pageSize);
+            
+            var list = moviesFetched.ToPaginatedViewModels();
 
-            if (moviesFetched.Any())
-            {
-                movieViewModels = moviesFetched.Select(x => x.ToViewModel()).ToList();
-
-            }
-            return View(movieViewModels);
+            return View(list);
         }
 
         [HttpGet]
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             MovieViewModel movieViewModel = new()
             {
@@ -65,14 +68,14 @@ namespace MovieManagement.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add([FromForm] MovieViewModel movieViewModel)
+        public async Task<IActionResult> Add([FromForm] MovieViewModel movieViewModel)
         {
             if (ModelState.IsValid)
             {
                 var movie = movieViewModel.ToModel();
 
                 _db.Movies.Add(movie);
-                _db.SaveChanges();
+                await _db.SaveChangesAsync();
 
                 return RedirectToAction(nameof(Index));
             }

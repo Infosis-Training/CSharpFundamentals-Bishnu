@@ -1,15 +1,19 @@
-﻿@using MovieManagement.ViewModels
-@model List<MovieViewModel>
+﻿@model PaginationList<MovieViewModel>
 
 @{
     ViewData["Title"] = "All Movies";
+    var prevDisabled = Model.HasPreviousPage ? "" : "disabled";
+    var nextDisabled = Model.HasNextPage ? "" : "disabled";
 }
 
 <form asp-action="Index" method="get" class="row">
-    <div class="col-md-5">
+    <div class="col-md-2">
+        <a class="btn btn-success form-control" href="/movie/add"><i class="bi bi-plus-lg"></i> Add Movie</a>
+    </div>
+    <div class="col-md-3">
         <input class="form-control" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Type movie keywords: name, description etc." />
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
         <input class="form-control btn btn-primary" type="submit" value="Search" />
     </div>
 
@@ -21,6 +25,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                 <li>
                     <a class="dropdown-item" asp-action="Index"
+                       asp-route-pageNumber="@ViewData["PageNumber"]"
                        asp-route-searchString="@ViewData["CurrentFilter"]"
                        asp-route-sortOrder="@ViewData["MovieNameSortParam"]">
                         Movie Name
@@ -29,6 +34,7 @@
                 <li>
                     <a class="dropdown-item"
                        asp-action="Index"
+                       asp-route-pageNumber="@ViewData["PageNumber"]"
                        asp-route-searchString="@ViewData["CurrentFilter"]"
                        asp-route-sortOrder="@ViewData["ReleaseDateSortParam"]">
                         Movie Release Date
@@ -47,8 +53,23 @@
         </div>
     </div>
 
-    <div class="col-md-3">
-        <a class="btn btn-success form-control" href="/movie/add"><i class="bi bi-plus-lg"></i> Add Movie</a>
+    <div class="col-md-2">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           asp-route-searchString="@ViewData["CurrentFilter"]"
+           class="btn btn-primary w-100 @prevDisabled">
+           <i class="bi bi-chevron-left"></i> Previous Page
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-primary w-100 @nextDisabled">
+           Next Page <i class="bi bi-chevron-right"></i>
+        </a>
     </div>
 </form>
 
@@ -62,8 +83,8 @@
                     <h5 class="card-title">
                         @movieViewModel.Name
                         <span class="float-end">
-                            <a asp-action="Edit" asp-route-id="@movieViewModel.Id"><i class="bi bi-pencil-fill text-warning"></i></a>
-                            <a asp-action="Delete" asp-route-id="@movieViewModel.Id"><i class="bi bi-trash-fill text-danger"></i></a>
+                            <a asp-action="Edit" asp-route-id="@movieViewModel.Id" title="Edit"><i class="bi bi-pencil-fill text-warning"></i></a>
+                            <a asp-action="Delete" asp-route-id="@movieViewModel.Id" title="Delete"><i class="bi bi-trash-fill text-danger"></i></a>
                         </span>
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">@movieViewModel.GenreName (Length: @movieViewModel.LengthInMin mins)</h6>
