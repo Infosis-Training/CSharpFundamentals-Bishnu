@@ -31,25 +31,25 @@ namespace MovieManagement.Controllers
             ViewData["GenreSortParam"] = sortOrder == "genre_desc" ? "genre_asc" : "genre_desc";
             ViewData["CurrentFilter"] = searchString;
 
-            var movies = _db.Movies.Include(x => x.Genre).AsQueryable();
+            var movieQuery = _db.Movies.Include(x => x.Genre).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(m => m.Name.Contains(searchString)
+                movieQuery = movieQuery.Where(m => m.Name.Contains(searchString)
                                        || m.Description.Contains(searchString));
             }
 
-            movies = sortOrder switch
+            movieQuery = sortOrder switch
             {
-                "name_desc" => movies.OrderByDescending(x => x.Name),
-                "release_date_desc" => movies.OrderByDescending(x => x.ReleaseDate),
-                "release_date_asc" => movies.OrderBy(x => x.ReleaseDate),
-                "genre_desc" => movies.OrderByDescending(x => x.Genre.Name),
-                "genre_asc" => movies.OrderBy(x => x.Genre.Name),
-                _ => movies.OrderBy(x => x.Name)
+                "name_desc" => movieQuery.OrderByDescending(x => x.Name),
+                "release_date_desc" => movieQuery.OrderByDescending(x => x.ReleaseDate),
+                "release_date_asc" => movieQuery.OrderBy(x => x.ReleaseDate),
+                "genre_desc" => movieQuery.OrderByDescending(x => x.Genre.Name),
+                "genre_asc" => movieQuery.OrderBy(x => x.Genre.Name),
+                _ => movieQuery.OrderBy(x => x.Name)
             };
 
-            var moviesFetched = new PaginationList<Movie>(movies, pageNumber, pageSize);
+            var moviesFetched = new PaginationList<Movie>(movieQuery, pageNumber, pageSize);
             
             var list = moviesFetched.ToPaginatedViewModels();
 

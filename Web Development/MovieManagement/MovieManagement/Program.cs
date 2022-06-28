@@ -1,15 +1,27 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using MovieManagement.Data;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+
 builder.Services.AddDbContext<MovieManagementDb>(options =>
 {
-    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MovieDb;Trusted_Connection=True");    
+    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MovieDb;Trusted_Connection=True");
 });
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+})
+.AddEntityFrameworkStores<MovieManagementDb>();
+
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -25,11 +37,15 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Movie}/{action=Index}/{id?}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapRazorPages();
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Movie}/{action=Index}/{id?}");
+});
 
 app.Run();

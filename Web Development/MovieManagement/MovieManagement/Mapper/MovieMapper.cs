@@ -42,7 +42,8 @@ namespace MovieManagement.Mapper
             return movie;
         }
 
-        public static PaginationList<MovieViewModel> ToPaginatedViewModels(this PaginationList<Movie> models)
+        public static PaginationList<MovieViewModel> ToPaginatedViewModels(
+            this PaginationList<Movie> models)
         {
             var pList = new PaginationList<MovieViewModel>();
 
