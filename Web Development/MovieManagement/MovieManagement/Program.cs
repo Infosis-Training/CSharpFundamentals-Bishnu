@@ -6,11 +6,11 @@ using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("devconnection")
+    ?? throw new InvalidOperationException("Connection string 'devconnection' not found.");
 
 builder.Services.AddDbContext<MovieManagementDb>(options =>
-{
-    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MovieDb;Trusted_Connection=True");
-});
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
