@@ -12,13 +12,18 @@ var connectionString = builder.Configuration.GetConnectionString("devconnection"
 builder.Services.AddDbContext<MovieManagementDb>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
-    options.Password.RequireUppercase = false;
+    // Custom Password settings.
+    options.Password.RequiredLength = 4;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredUniqueChars = 1;
 })
-.AddEntityFrameworkStores<MovieManagementDb>();
+    .AddEntityFrameworkStores<MovieManagementDb>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

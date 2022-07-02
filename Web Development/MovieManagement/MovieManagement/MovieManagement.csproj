@@ -33,4 +33,11 @@
     <Folder Include="Areas\Admin\Views\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Identity\Pages\AccountAdmin\AddRole.cshtml" />
+    <None Include="Areas\Identity\Pages\AccountAdmin\AssignRole.cshtml" />
+    <None Include="Areas\Identity\Pages\AccountAdmin\RoleAssignment.cshtml" />
+    <None Include="Areas\Identity\Pages\AccountAdmin\Roles.cshtml" />
+  </ItemGroup>
+
 </Project>

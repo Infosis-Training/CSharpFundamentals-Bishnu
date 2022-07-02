@@ -25,7 +25,20 @@
                         <li><a class="dropdown-item" href="/movie/add">Add New</a></li>
                     </ul>
                 </li>
-                @if (User.IsInRole("Admin"))
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Account Admin
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Identity/AccountAdmin/AddRole">Add Role</a></li>
+                            <li><a class="dropdown-item" href="/Identity/AccountAdmin/RoleAssignment">Role Assignment</a></li>
+                        </ul>
+                    </li>
+                }
+
+                @if (User?.IsInRole("Admin") ?? false)
                 {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
