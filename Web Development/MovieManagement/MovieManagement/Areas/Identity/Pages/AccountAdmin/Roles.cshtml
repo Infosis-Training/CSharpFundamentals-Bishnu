@@ -8,7 +8,7 @@
 <h4 class="mb-4">All Roles</h4>
 @foreach (var role in Model.Roles)
 {
-    <div class="d-inline p-2 bg-primary"><a class="text-white" href=".\editRole?roleId=@role.Id">@role.Name</a></div>
+    <div class="d-inline p-2 bg-primary">@role.Name</div>
 }
 
 <div class="mt-4">

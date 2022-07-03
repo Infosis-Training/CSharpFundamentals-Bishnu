@@ -39,7 +39,7 @@ namespace MovieManagement.Areas.Identity.Pages.AccountAdmin
 
                 foreach (var role in UserRoles)
                 {
-                    if (!await _userManager.IsInRoleAsync(user, role))
+                    if (!await _userManager.IsInRoleAsync(user, role.Trim()))
                     {
                         var result = await _userManager.AddToRoleAsync(user, role);
                         if (!result.Succeeded)
