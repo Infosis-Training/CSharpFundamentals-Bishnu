@@ -1,8 +1,46 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    var baseUrl = "https://localhost:7244";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<button id="getMovie">Fetch Movies</button>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Release Date</th>
+      <th scope="col">Length</th>
+    </tr>
+  </thead>
+  <tbody id="tableBody">    
+  </tbody>
+</table>
+
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        $("#getMovie").on("click", function(event) {
+            $.ajax({
+                url: "@baseUrl" + "/api/movies",
+                success: function(result) {
+                    var rows = "";
+                    for (var i = 0; i < result.length; i++) {
+                        var row = "<tr>" + 
+                        "<td>"+(i+1)+"</td>" +
+                        "<td>"+result[i].name+"</td>" + 
+                        "<td>"+result[i].description+"</td>" + 
+                        "<td>"+result[i].releaseDate+"</td>" + 
+                        "<td>"+result[i].lengthInMin+"</td>" +                         
+                        "</tr>"
+                        rows += row;
+                    }
+                    $("#tableBody").html(rows);
+                }
+            });
+        }); 
+    </script>
+}
