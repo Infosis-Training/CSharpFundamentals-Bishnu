@@ -56,4 +56,8 @@
          * Apply filtering (searching) on movie list table with search box on top of table, searching should be on movie name and description.
          * Note: Follow this tutorial to complete above - https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/sort-filter-page?view=aspnetcore-6.0
      * Create two idenity views: Role CRUD, Role assignment to user
+     
+1. **API**
+     * Integrate auth (JWT tokens)
+     * Test your endpoints on Postman using bearer tokesn
        
