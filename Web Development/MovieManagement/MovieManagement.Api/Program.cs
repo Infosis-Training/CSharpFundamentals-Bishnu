@@ -2,8 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieManagement.Api.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<MovieManagementApiContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MovieManagementApiContext") ?? throw new InvalidOperationException("Connection string 'MovieManagementApiContext' not found.")));
+builder.Services.AddDbContext<MovieManagementApiContext>();
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -14,12 +13,8 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

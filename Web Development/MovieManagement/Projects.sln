@@ -14,7 +14,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageProcessing", "..\Image
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloApi", "..\HelloApi\HelloApi.csproj", "{FE1CF6A0-261E-44B2-8DD5-6E1C326660DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MovieManagement.Api", "MovieManagement.Api\MovieManagement.Api.csproj", "{6D8F4A4D-5774-4808-B036-A3FC28A01BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MovieManagement.Api", "MovieManagement.Api\MovieManagement.Api.csproj", "{6D8F4A4D-5774-4808-B036-A3FC28A01BE8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Spa", "Spa", "{8E73CB5E-6159-46E6-811F-30FE30FBAA7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemo.Server", "..\BlazorDemo\Server\BlazorDemo.Server.csproj", "{A88A981E-0438-480E-A520-F39878AC300A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemo.Client", "..\BlazorDemo\Client\BlazorDemo.Client.csproj", "{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemo.Shared", "..\BlazorDemo\Shared\BlazorDemo.Shared.csproj", "{7F6E45A7-15DA-485B-9D70-DD61505F0BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +46,26 @@ Global
 		{6D8F4A4D-5774-4808-B036-A3FC28A01BE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D8F4A4D-5774-4808-B036-A3FC28A01BE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D8F4A4D-5774-4808-B036-A3FC28A01BE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A88A981E-0438-480E-A520-F39878AC300A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A88A981E-0438-480E-A520-F39878AC300A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A88A981E-0438-480E-A520-F39878AC300A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A88A981E-0438-480E-A520-F39878AC300A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F6E45A7-15DA-485B-9D70-DD61505F0BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F6E45A7-15DA-485B-9D70-DD61505F0BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F6E45A7-15DA-485B-9D70-DD61505F0BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F6E45A7-15DA-485B-9D70-DD61505F0BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A88A981E-0438-480E-A520-F39878AC300A} = {8E73CB5E-6159-46E6-811F-30FE30FBAA7D}
+		{749EAC54-AA67-4AD8-89CF-BA1C4B1C65CB} = {8E73CB5E-6159-46E6-811F-30FE30FBAA7D}
+		{7F6E45A7-15DA-485B-9D70-DD61505F0BFC} = {8E73CB5E-6159-46E6-811F-30FE30FBAA7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ACBEAA96-7439-420F-B431-4A703FCAC27C}
